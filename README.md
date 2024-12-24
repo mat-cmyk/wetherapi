@@ -1,6 +1,4 @@
-Claro! Aqui está um exemplo de README para uma aplicação que consome uma Weather API:
 
----
 
 # Weather App 🌦️
 
