@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WhetherApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0177a44d248d6f2108e0d1512356ddf1f3141e0c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f01adb1bf6e91b857544f66d9a731debef7eb01")]
 [assembly: System.Reflection.AssemblyProductAttribute("WhetherApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WhetherApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

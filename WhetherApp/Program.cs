@@ -7,14 +7,15 @@ var app = builder.Build();
 
 app.UseRewriter(new RewriteOptions().AddRedirect("tasks/(.*)", "todos/$1"));
 
-
+//Middleware exemple
 app.Use(async (context, next) =>
 {
-    Console.WriteLine($" {context.Request.Method} {context.Request.Path} {DateTime.Now} Started.");
+    Console.WriteLine($" [{context.Request.Method} {context.Request.Path} {DateTime.Now}] Started.");
     await next();
-    Console.WriteLine($" {context.Request.Method} {context.Request.Path} {DateTime.Now} Finished.");
+    Console.WriteLine($" [{context.Request.Method} {context.Request.Path} {DateTime.Now}] Finished.");
 
 });
+
 
 
 var todos = new List<Todo>();
@@ -41,6 +42,27 @@ app.MapPost("/todos", (Todo task) =>
 {
     todos.Add(task);
     return TypedResults.Created($"/todos/{task.Id}", task);
+    //endpoint filter
+}).AddEndpointFilter(async(context, next) =>
+{
+    var taskArgument =context.GetArgument<Todo>(0);
+    var errors = new Dictionary<string, string[]>();
+
+
+    if (taskArgument.DueDate < DateTime.UtcNow)
+    {
+        errors.Add("DueDate", new[] { "Due date must be in the future" });
+    }
+    if(taskArgument.IsCompleted)
+    {
+        errors.Add("IsCompleted", new[] { "IsCompleted must be false" });
+    }
+
+    if (errors.Any())
+    {
+        return Results.ValidationProblem(errors);
+    }
+    return await next(context);
 });
 
 
